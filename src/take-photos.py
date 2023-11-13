@@ -1,6 +1,5 @@
-import cv2
-camera = cv2.VideoCapture(0)
+from picamera import PiCamera
+from time import sleep
+camera = PiCamera()
 for i in range(10):
-    ret, image = camera.read()
-    fileimage = open(f"{i}.jpg", wb)
-        
+       camera.capture(f"./foto{i}.jpg") 
