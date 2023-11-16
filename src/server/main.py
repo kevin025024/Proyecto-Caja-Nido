@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
+import datetime
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = "imgs"
@@ -12,8 +13,12 @@ def ping():
 def upload_file():
    if request.method == 'POST':
       f = request.files['file']
-      f.save(secure_filename(f.filename))
-      return 'file uploaded successfully'
+      hoy = datetime.datetime.now()
+      hoy = str(hoy)
+      hoy =hoy.replace(" ","-").replace(":","-")
+
+      f.save(secure_filename(f"{hoy}.jpg"))
+      return 'El archivo se ha subido correctamente'
 		
 if __name__ == '__main__':
-   app.run(debug = True, host="10.9.121.15")
+   app.run(debug = True, host="10.9.121.68")
